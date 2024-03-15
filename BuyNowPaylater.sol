@@ -68,8 +68,7 @@ mapping(address =>uint256) public balances;
         ashaToken.transferFrom(insuranceCompany,msg.sender, asha_token_to_transfer_by_insur);
         users[msg.sender].owedToInsuranceCompany -= asha_token_to_transfer_by_insur;
         users[msg.sender].ashaTokenBalance += asha_token_to_transfer_by_insur;
-        // balances[insuranceCompany] -= msg.value.mul(10000);
-        // balances[msg.sender] += msg.value.mul(10000);
+     
         emit Paid(msg.sender, msg.value);
     }
     function insuranceInfo(address user) external view returns (uint256) {
