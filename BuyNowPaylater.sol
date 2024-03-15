@@ -29,3 +29,28 @@ mapping(address =>uint256) public balances;
        insuranceCompany = _insuranceCompany;
     }
 
+function buy(uint256 percentage) external payable {
+        require(percentage >= 10 && percentage <= 50, "Invalid percentage");
+        uint256 ashaTokenAmount = (msg.value).mul(10000);
+        // require(msg.value >= ashaTokenAmount, "Insufficient ETH");
+        ashaToken.transfer(msg.sender, ashaTokenAmount);
+        users[msg.sender].ashaTokenBalance = users[msg.sender].ashaTokenBalance.add(ashaTokenAmount);
+        if (percentage > 10) {
+            uint256 insuranceCompanyPayment = (percentage - 10).mul(10000*10**18).div(100);
+            users[msg.sender].owedToInsuranceCompany = users[msg.sender].owedToInsuranceCompany.add(insuranceCompanyPayment);
+            users[msg.sender].installmentDueDate = block.timestamp + 30 days;
+            ashaToken.transfer(insuranceCompany, insuranceCompanyPayment);
+            emit Received(insuranceCompany, insuranceCompanyPayment);
+        }
+        emit Bought(msg.sender, ashaTokenAmount);
+         // Transfer 1 Ether from buyer to the contract
+        // buyer.transfer(1 ether);
+        // emit FundsTransferred(buyer, 1 ether);
+        
+        // Transfer 1 Ether from seller to the contract
+        // insuranceCompany.transfer(1 ether);
+        // emit FundsTransferred(insuranceCompany, 1 ether);
+       
+    }
+
+
