@@ -52,5 +52,19 @@ function buy(uint256 percentage) external payable {
         // emit FundsTransferred(insuranceCompany, 1 ether);
        
     }
+function pay() external payable{ 
+        //require(users[msg.sender].owedToInsuranceCompany >= amount, "Insufficient amount to pay");
+        //require(block.timestamp >= users[msg.sender].installmentDueDate, "Installment not due yet");
+        //users[msg.sender].owedToInsuranceCompany = users[msg.sender].owedToInsuranceCompany - msg.value*10000;
+        users[msg.sender].installmentDueDate = users[msg.sender].installmentDueDate + 30 days;
+        
+        uint asha_token_to_transfer_by_insur = users[msg.sender].owedToInsuranceCompany - users[msg.sender].ashaTokenBalance;
+        ashaToken.transferFrom(insuranceCompany,msg.sender, asha_token_to_transfer_by_insur);
+        users[msg.sender].owedToInsuranceCompany -= asha_token_to_transfer_by_insur;
+        users[msg.sender].ashaTokenBalance += asha_token_to_transfer_by_insur;
+        // balances[insuranceCompany] -= msg.value.mul(10000);
+        // balances[msg.sender] += msg.value.mul(10000);
+        emit Paid(msg.sender, msg.value);
+    }
 
 
