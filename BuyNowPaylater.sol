@@ -70,5 +70,7 @@ function insuranceInfo(address user) external view returns (uint256) {
         // balances[msg.sender] += msg.value.mul(10000);
         emit Paid(msg.sender, msg.value);
     }
-
+ function getUserInfo(address user) external view returns (uint256, uint256, uint256) {
+        return (users[user].ashaTokenBalance, users[user].owedToInsuranceCompany, users[user].installmentDueDate);
+    }
 
