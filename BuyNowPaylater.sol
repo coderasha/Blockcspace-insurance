@@ -73,4 +73,14 @@ function insuranceInfo(address user) external view returns (uint256) {
  function getUserInfo(address user) external view returns (uint256, uint256, uint256) {
         return (users[user].ashaTokenBalance, users[user].owedToInsuranceCompany, users[user].installmentDueDate);
     }
-
+ function getInsuranceEthBalance() external view returns (uint256) {
+        return insuranceCompany.balance;
+    }
+     function getcontractBalance() external view returns (uint256) {
+        return address(this).balance;
+    }
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+    
+}
