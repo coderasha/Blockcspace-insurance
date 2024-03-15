@@ -63,6 +63,10 @@ function pay() external payable{
         users[msg.sender].owedToInsuranceCompany -= asha_token_to_transfer_by_insur;
         users[msg.sender].ashaTokenBalance += asha_token_to_transfer_by_insur;
         // balances[insuranceCompany] -= msg.value.mul(10000);
+
+function insuranceInfo(address user) external view returns (uint256) {
+        return users[user].owedToInsuranceCompany;
+    }
         // balances[msg.sender] += msg.value.mul(10000);
         emit Paid(msg.sender, msg.value);
     }
