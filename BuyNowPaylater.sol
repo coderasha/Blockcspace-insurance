@@ -23,3 +23,9 @@ mapping(address =>uint256) public balances;
     event Paid(address indexed buyer, uint256 amount);
     event Received(address indexed buyer, uint256 amount);
      event FundsTransferred(address indexed sender, uint256 amount);
+
+ constructor(IERC20 _ashaToken, address payable _insuranceCompany) {
+        ashaToken = _ashaToken;
+       insuranceCompany = _insuranceCompany;
+    }
+
