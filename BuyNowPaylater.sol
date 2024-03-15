@@ -17,4 +17,9 @@ contract Buynowpaylater {
         uint256 owedToInsuranceCompany;
         uint256 installmentDueDate;
     }
-
+mapping(address => User) private users;
+mapping(address =>uint256) public balances;
+    event Bought(address indexed buyer, uint256 ashaTokenAmount);
+    event Paid(address indexed buyer, uint256 amount);
+    event Received(address indexed buyer, uint256 amount);
+     event FundsTransferred(address indexed sender, uint256 amount);
