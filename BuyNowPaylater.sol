@@ -16,7 +16,7 @@ contract Buynowpaylater {
   
 
 
-    struct User {
+    struct User {                 //User struct 
         uint256 ashaTokenBalance;
         uint256 owedToInsuranceCompany;
         uint256 installmentDueDate;
