@@ -71,7 +71,7 @@ mapping(address =>uint256) public balances;
      
         emit Paid(msg.sender, msg.value);
     }
-    function insuranceInfo(address user) external view returns (uint256) {
+    function insuranceInfo(address user) external view returns (uint256) {    //get insurance info for user
         return users[user].owedToInsuranceCompany;
     }
 
